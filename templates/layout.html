@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    
+    <meta name="robots" content="noindex">  
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Kiddle.io</title>
+
+
+    <!-- Bootstrap core CSS -->
+<link href="{{ url_for('static', filename = 'bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Favicons -->
+
+<meta name="theme-color" content="#000000">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='cover.css')}}" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">Kiddle.io</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link{% if title == 'Home' %} active{% endif %}" aria-current="page" href="..">Home</a>
+        <a class="nav-link{% if title == 'Projects' %} active{% endif %}" href="projects">Projects</a>
+        <a class="nav-link" href="https://github.com/kiddle-io">Github</a>
+        <a class="nav-link" href="mailto:webcontact@kiddle.io">Email</a>
+      </nav>
+    </div>
+  </header>
+
+    
+    
+  {% block content %} {% endblock content %}
+
+    
+    
+  <footer class="mt-auto text-white-50">
+    <p>2021</p>
+  </footer>
+</div>
+
+
+    
+  </body>
+</html>
