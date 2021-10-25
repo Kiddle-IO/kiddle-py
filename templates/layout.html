@@ -11,11 +11,14 @@
 
 
     <!-- Bootstrap core CSS -->
-<link href="{{ url_for('static', filename = 'bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'bootstrap.min.css')}}" rel="stylesheet">
 
+    
     <!-- Favicons -->
-
-<meta name="theme-color" content="#000000">
+    <!-- To do -->
+    
+    
+    <meta name="theme-color" content="#000000">
 
 
     <style>
@@ -38,31 +41,29 @@
     <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='cover.css')}}" rel="stylesheet">
   </head>
+  
   <body class="d-flex h-100 text-center text-white bg-dark">
     
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0">Kiddle.io</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link{% if title == 'Home' %} active{% endif %}" aria-current="page" href="..">Home</a>
-        <a class="nav-link{% if title == 'Projects' %} active{% endif %}" href="projects">Projects</a>
-        <a class="nav-link" href="https://github.com/kiddle-io">Github</a>
-        <a class="nav-link" href="mailto:webcontact@kiddle.io">Email</a>
-      </nav>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0">Kiddle.io</h3>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link{% if title == 'Home' %} active{% endif %}" aria-current="page" href="..">Home</a>
+            <a class="nav-link{% if title == 'Projects' %} active{% endif %}" href="projects">Projects</a>
+            <a class="nav-link" href="https://github.com/kiddle-io">Github</a>
+            <a class="nav-link" href="mailto:webcontact@kiddle.io">Email</a>
+          </nav>
+        </div>
+      </header>
+      
+      <!-- Flask generated web content goes here -->
+      {% block content %} {% endblock content %}
+
+      <footer class="mt-auto text-white-50">
+        <p>2021</p>
+      </footer>
     </div>
-  </header>
-
-    
-    
-  {% block content %} {% endblock content %}
-
-    
-    
-  <footer class="mt-auto text-white-50">
-    <p>2021</p>
-  </footer>
-</div>
 
 
     
