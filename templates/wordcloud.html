@@ -10,5 +10,8 @@
         <button type="submit" class="btn btn-sm btn-secondary fw-bold border-white bg-white">Submit</button>
     </form>
 
-<img src="/plot.png">
+{% if title %}
+<p><strong>Processing: {{ title }}</strong></p>
+{% endif %}
+<img src="plot.png">
 {% endblock content %}
