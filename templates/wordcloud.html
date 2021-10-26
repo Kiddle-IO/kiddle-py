@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3>Generate a word cloud!</h3>
+<p>Enter the name of a Wikipedia page (e.g <em>Data science</em>, <em>Ice cream</em>, <em>France</em>) to get a visualisation of the most common words in the article. </p>
+    <form role="form" method='POST' action='#'>
+        <div class="form-group justify-content-center">
+            <input type="text" name="title" class="form-control" placeholder="Wikipedia" style="max-width: 300px;" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-sm btn-secondary fw-bold border-white bg-white">Submit</button>
+    </form>
+
+<img src="/plot.png">
+{% endblock content %}
