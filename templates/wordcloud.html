@@ -6,15 +6,36 @@
 <p>NOTE: Some shorter words may fail to be correctly recognised (e.g. 'cake' is interpretted as 'cape'), or fail to be recognised at all (resulting in a broken image).</p>
     <form role="form" method='POST' action='#'>
         <div class="form-group justify-content-center">
-            <input type="text" name="title" class="form-control" placeholder="Enter a word or phrase here" style="max-width: 300px; margin: auto;" autofocus required>
+            <input type="text" name="title" class="form-control" placeholder="Enter a word or phrase here" {% if title %} value="{{ title }}" {% endif %}style="max-width: 300px; margin: auto;" autofocus required>
         </div>
-
+        
+        <label for="bg">Choose the background color:</label>
+        <select id = "bg" name="bg">
+            <option value="white"{% if bg == "white" %} selected{% endif %}>white</option>
+            <option value="black"{% if bg == "black" %} selected{% endif %}>black</option>
+            <option value="red"{% if bg == "red" %} selected{% endif %}>red</option>
+            <option value="green"{% if bg == "green" %} selected{% endif %}>green</option>
+            <option value="yellow"{% if bg == "yellow" %} selected{% endif %}>yellow</option>
+            <option value="grey"{% if bg == "grey" %} selected{% endif %}>grey</option>
+        </select>
+        <br>
+        <label for="cmap">Choose the text color scheme:</label>
+        <select id = "cmap" name="cmap"{% if cmap %} value = "{{ cmap }}"{% endif %}>
+            <option value="viridis"{% if cmap == "viridis" %} selected{% endif %}>viridis</option>
+            <option value="Reds"{% if cmap == "Reds" %} selected{% endif %}>Reds</option>
+            <option value="binary"{% if cmap == "binary" %} selected{% endif %}>binary</option>
+            <option value="cool"{% if cmap == "cool" %} selected{% endif %}>cool</option>
+            <option value="hot"{% if cmap == "hot" %} selected{% endif %}>hot</option>
+            <option value="flag"{% if cmap == "flag" %} selected{% endif %}>flag</option>
+            <option value="prism"{% if cmap == "prism" %} selected{% endif %}>prism</option>
+        </select>
+        <br>
         <button type="submit" class="btn btn-sm btn-secondary fw-bold border-white bg-white">Submit</button>
     </form>
 
 {% if title %}
 <p><strong>Processing:</strong> {{ title }}...</p>
 <p><em>Please wait - this may take a few seconds.</em></p>
-<img src="/plot/{{ title }}.png">
+<img src="/generatecloud/{{ title }}/{{ bg }}/{{ cmap }}.png">
 {% endif %}
 {% endblock content %}

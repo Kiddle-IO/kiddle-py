@@ -17,14 +17,14 @@ import io
 app = Flask(__name__)
 
 
-def wikigen(string):
+def wikigen(string, bg='white', cmap='viridis'):
     bigstring = wikipedia.page(string).content
-
+    stopwords_session = STOPWORDS
+    stopwords_session.update(['U','S','K'])
     plt.figure(figsize=(12,12))
-    wordcloud = WordCloud(stopwords = STOPWORDS,
-                          background_color='white',
-                          #background_color='black',
-                          #colormap = 'Reds',
+    wordcloud = WordCloud(stopwords = stopwords_session,
+                          background_color=bg,
+                          colormap = cmap,
                           collocations=False,
                           width =1200,
                           height =1000
@@ -33,9 +33,9 @@ def wikigen(string):
     return wordcloud
     
     
-@app.route('/plot/<name>.png', methods=['GET', 'POST'])
-def plot_png(name):
-    fig = wikigen(name)
+@app.route('/generatecloud/<name>/<bg>/<cmap>.png', methods=['GET', 'POST'])
+def plot_png(name, bg, cmap):
+    fig = wikigen(name, bg, cmap)
     output = fig.to_image()
     buf = io.BytesIO()
     output.save(buf, format='PNG')
@@ -59,7 +59,9 @@ def about():
 def wordcloud():
     if request.method == "POST":
         title = request.form['title']
-        return render_template('wordcloud.html', title=title)
+        bg = request.form['bg']
+        cmap = request.form['cmap']
+        return render_template('wordcloud.html', title=title, bg=bg, cmap=cmap)
         
     else:
         return render_template('wordcloud.html')
