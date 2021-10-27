@@ -2,12 +2,30 @@
 
 {% block content %}
 <h3>Generate a word cloud!</h3>
-<p>Enter the name of a Wikipedia page (e.g <em>Data science</em>, <em>Ice cream</em>, <em>France</em>) to get a visualisation of the most common words in the article. </p>
-<p>NOTE: Some shorter words may fail to be correctly recognised (e.g. 'cake' is interpretted as 'cape'), or fail to be recognised at all (resulting in a broken image).</p>
+<p>Enter the name of a Wikipedia page (e.g <em>'Data science'</em>, <em>'Ice cream'</em>, <em>'France'</em>) to get a visualisation of the most common words in the article. </p>
+<p>NOTE: Some shorter words may fail to match correctly. In this case, try using an additional word to specify (e.g. <em>'cake food'</em>, <em>'cat animal'</em>)</p>
     <form role="form" method='POST' action='#'>
+        {% if not ambig %}
         <div class="form-group justify-content-center">
             <input type="text" name="title" class="form-control" placeholder="Enter a word or phrase here" {% if title %} value="{{ title }}" {% endif %}style="max-width: 300px; margin: auto;" autofocus required>
         </div>
+        {% endif %}
+        
+        {% if ambig %}
+        <p style="color:yellow">Ambiguous result: Please specify from the list below</p>
+
+        <select id="ambig" name="title">
+          {% for i in ambig %}
+            <option value="{{ i }}">{{ i }}</option>
+                  
+          {% endfor %}
+        </select>  
+        <br>      
+        {% endif %}
+        
+        {% if error %}
+        <p style="color:red">No article found. Please try a different word or phrase.</p>
+        {% endif %}
         
         <label for="bg">Choose the background color:</label>
         <select id = "bg" name="bg">
@@ -30,12 +48,18 @@
             <option value="prism"{% if cmap == "prism" %} selected{% endif %}>prism</option>
         </select>
         <br>
+      
         <button type="submit" class="btn btn-sm btn-secondary fw-bold border-white bg-white">Submit</button>
     </form>
 
-{% if title %}
+{% if wikivalid %}
 <p><strong>Processing:</strong> {{ title }}...</p>
 <p><em>Please wait - this may take a few seconds.</em></p>
 <img src="/generatecloud/{{ title }}/{{ bg }}/{{ cmap }}.png">
 {% endif %}
+
+
+
+
+
 {% endblock content %}
