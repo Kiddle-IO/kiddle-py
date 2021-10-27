@@ -58,9 +58,9 @@ def about():
 @app.route("/wordcloud", methods=['GET', 'POST'])
 def wordcloud():
     if request.method == "POST":
-        session['title'] = request.form['title']
-        #return render_template('wordcloud.html', title=title)
-        return redirect(url_for('plot.png'))
+        title = request.form['title']
+        return render_template('wordcloud.html', title=title)
+        
     else:
         return render_template('wordcloud.html')
 

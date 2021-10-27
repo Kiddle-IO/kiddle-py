@@ -3,15 +3,18 @@
 {% block content %}
 <h3>Generate a word cloud!</h3>
 <p>Enter the name of a Wikipedia page (e.g <em>Data science</em>, <em>Ice cream</em>, <em>France</em>) to get a visualisation of the most common words in the article. </p>
+<p>NOTE: Some shorter words may fail to be correctly recognised (e.g. 'cake' is interpretted as 'cape'), or fail to be recognised at all (resulting in a broken image).</p>
     <form role="form" method='POST' action='#'>
         <div class="form-group justify-content-center">
-            <input type="text" name="title" class="form-control" placeholder="Wikipedia" style="max-width: 300px;" autofocus required>
+            <input type="text" name="title" class="form-control" placeholder="Enter a word or phrase here" style="max-width: 300px; margin: auto;" autofocus required>
         </div>
+
         <button type="submit" class="btn btn-sm btn-secondary fw-bold border-white bg-white">Submit</button>
     </form>
 
 {% if title %}
-<p><strong>Processing: {{ title }}</strong></p>
+<p><strong>Processing:</strong> {{ title }}...</p>
+<p><em>Please wait - this may take a few seconds.</em></p>
+<img src="/plot/{{ title }}.png">
 {% endif %}
-<img src="plot.png">
 {% endblock content %}
