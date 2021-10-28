@@ -4,18 +4,28 @@
   <main class="px-3">
     <h1>Projects</h1>
     <div class="container">
+      <style type="text/css">
+        a:link { color:white; text-decoration: none; }
+        a:visited { color:white; text-decoration: none; }
+        a:hover { color:grey; text-decoration: none; }
+        a:active { color:grey; text-decoration: underline; }
+      </style>
       <div class="row">
-        <div class="col-sm border rounded col-sm-offset-1">
-          <h3>Kiddle.io</h3>
-          <p>This site is run from a Python server using the Flask library.</p>
-          <p>The live code is available at <a href="https://github.com/Kiddle-IO/kiddle-py" class="link-light">Github</a>.</p>
+        <a href="https://github.com/Kiddle-IO/kiddle-py" target="_blank">
+          <div class="col-md">
+            <div class="col-sm border rounded col-sm-offset-1" style="height:200px; width:220px;">
+              <h3>Kiddle.io</h3>
+              <p>This site is run from a Python server using the Flask library.</p>
+              <p><strong><u>View source code on Github</strong></u></p>
+            </div>
+          </a>
         </div>
         <div class="col-md">
           <a href="/wordcloud" style="text-decoration: none">
-            <div class="col-sm border rounded col-sm-offset-1">
+            <div class="col-sm border rounded col-sm-offset-1" style="height:200px; width:220px;">
               <h3>Wiki cloud</h3>
               <p>A dynamic image generator, producing a summary of the most frequently used words on any given Wikipedia page.</p>
-              <p><strong>Click here.</strong></p>
+              <p><strong><u>Click here</u></strong></p>
             </div>
           </a>
         </div>
