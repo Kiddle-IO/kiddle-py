@@ -15,6 +15,7 @@ import io
 
 app = Flask(__name__)
 
+app.secret_key = open("secret_key.txt", "r").read()
 
 #Returns wiki page either as a string or a disambiguation list
 def wikitxt(string):
@@ -49,27 +50,27 @@ def wordcloud():
         except Exception:
             newtitle = False
         print(newtitle)
-        bg = request.form['bg']
-        cmap = request.form['cmap']
+        session['bg'] = request.form['bg']
+        session['cmap']  = request.form['cmap']
         if isinstance(wikitxt(title), list):
           txt = wikitxt(title)
         if newtitle:
-            return render_template('wordcloud.html', title=newtitle, bg=bg, cmap=cmap, wikivalid=True)
+            return render_template('wordcloud.html', title=newtitle, bg=session['bg'], cmap=session['cmap'], wikivalid=True)
         elif isinstance(wikitxt(title), str):
-            return render_template('wordcloud.html', title=title, bg=bg, cmap=cmap, wikivalid=True)
+            return render_template('wordcloud.html', title=title, bg=session['bg'], cmap=session['cmap'], wikivalid=True)
         elif isinstance(wikitxt(title), list):
             if wikitxt(title) == []:
-              return render_template('wordcloud.html', title=title, bg=bg, cmap=cmap, error=True)
+              return render_template('wordcloud.html', title=title, bg=session['bg'], cmap=session['cmap'], error=True)
             else:
-              return render_template('wordcloud.html', title=title, bg=bg, cmap=cmap, ambig=txt)               
+              return render_template('wordcloud.html', title=title, bg=session['bg'], cmap=session['cmap'], ambig=txt)               
     else:
         return render_template('wordcloud.html')
 
 
 
-@app.route('/generatecloud/<name>/<bg>/<cmap>.png', methods=['GET', 'POST'])
-def plot_png(name, bg, cmap):
-    fig = wikigen(name, bg, cmap)
+@app.route('/generatecloud/<name>.png', methods=['GET', 'POST'])
+def plot_png(name):
+    fig = wikigen(name, session['bg'], session['cmap'])
     output = fig.to_image()
     buf = io.BytesIO()
     output.save(buf, format='PNG')
