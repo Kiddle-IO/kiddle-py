@@ -1,17 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect, session
-
-
-import requests
+from flask import Flask, render_template, request, session, Response
 
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import wikipedia
 
-from flask import Response
-
-
 import io
-
 
 app = Flask(__name__)
 
@@ -41,6 +34,22 @@ def wikigen(string, bg='white', cmap='viridis'):
         return wordcloud
 
 
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('index.html', title='Home')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.route("/projects")
+def about():
+    return render_template('projects.html', title='Projects')
+
 @app.route("/wordcloud", methods=['GET', 'POST'])
 def wordcloud():
     if request.method == "POST":
@@ -67,7 +76,6 @@ def wordcloud():
         return render_template('wordcloud.html')
 
 
-
 @app.route('/generatecloud/<name>.png', methods=['GET', 'POST'])
 def plot_png(name):
     fig = wikigen(name, session['bg'], session['cmap'])
@@ -77,16 +85,7 @@ def plot_png(name):
     byte_im = buf.getvalue()
     plt.close('all')
     return Response(byte_im, mimetype='image/png')
-
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template('index.html', title='Home')
-
-@app.route("/projects")
-def about():
-    return render_template('projects.html', title='Projects')
-
-
+    
+    
 if __name__ == '__main__':
     app.run(debug=False)
