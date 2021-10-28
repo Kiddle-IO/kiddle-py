@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h3>Generate a word cloud!</h3>
-<p>Enter the name of a Wikipedia page (e.g <em>'Data science'</em>, <em>'Ice cream'</em>, <em>'France'</em>) to get a visualisation of the most common words in the article. </p>
-<p>NOTE: Some shorter words may fail to match correctly. In this case, try using an additional word to specify (e.g. <em>'cake food'</em>, <em>'cat animal'</em>)</p>
+<div style="background:black; border-radius: 10px; padding:18px; padding-bottom:8px; margin:10px; text-align:justify;">
+  <h3 style="text-align:center; margin-bottom:12px;">Generate a word cloud!</h3>
+  <p>Enter the name of a Wikipedia page (e.g <em>'Data science'</em>, <em>'Ice cream'</em>, <em>'France'</em>) to get a visualisation of the most common words in the article. </p>
+  <p style="color:grey;">NOTE: Some shorter words may fail to match correctly. In this case, try using an additional word to specify (e.g. <em>'cake food'</em>, <em>'cat animal'</em>)</p>
+</div>
     <form role="form" method='POST' action='#'>
         {% if not ambig %}
         <div class="form-group justify-content-center">
