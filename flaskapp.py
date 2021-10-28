@@ -74,6 +74,7 @@ def plot_png(name, bg, cmap):
     buf = io.BytesIO()
     output.save(buf, format='PNG')
     byte_im = buf.getvalue()
+    plt.close('all')
     return Response(byte_im, mimetype='image/png')
 
 @app.route("/")
