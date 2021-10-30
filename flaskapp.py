@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, session, Response
 
+import modules.time_log as time_log
+
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import wikipedia
@@ -44,6 +46,11 @@ def home():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.route("/log")
+def log():
+    return time_log.run()
 
 
 @app.route("/projects")
