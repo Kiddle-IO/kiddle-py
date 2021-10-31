@@ -48,7 +48,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-@app.route("/log")
+@app.route("/log/530AE6")
 def log():
     return time_log.run()
 
